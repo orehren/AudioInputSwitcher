@@ -1,6 +1,6 @@
 {
-    "version": "",
-    "thumbnail": "",
-    "id": "",
-    "name": ""
+    "version": "1.0.0",
+    "thumbnail": "store/Thumbnail",
+    "id": "com_core447_AudioSwitcher",
+    "name": "Audio Switcher"
 }
