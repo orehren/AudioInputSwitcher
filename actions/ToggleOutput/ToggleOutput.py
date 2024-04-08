@@ -66,7 +66,7 @@ class ToggleOutput(ActionBase):
 
         return [self.device_A_row, self.device_B_row]
     
-    def get_device_name(sink) -> str:
+    def get_device_name(self, sink) -> str:
         proplist = sink.proplist
         return proplist.get("device.product.name", proplist.get("device.description", proplist.get("alsa.card_name")))
 
@@ -124,6 +124,7 @@ class ToggleOutput(ActionBase):
         return 0
 
     def on_key_down(self):
+        self.old_state = None
         settings = self.get_settings()
         device_a = settings.get("device_a")
         device_b = settings.get("device_b")
