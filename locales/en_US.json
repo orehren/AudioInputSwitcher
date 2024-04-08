@@ -4,5 +4,5 @@
     "actions.toggle-output.device-b.title": "Second device",
     "actions.set-device.device.title": "Device",
     "actions.toggle-output.name": "Toggle output",
-    "actions.set-device.name": "Set device"
+    "actions.set-output.name": "Set device"
 }

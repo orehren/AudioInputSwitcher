@@ -4,5 +4,5 @@
     "actions.toggle-output.device-b.title": "2. Gerät",
     "actions.set-device.device.title": "Gerät",
     "actions.toggle-output.name": "Ausgabe umschalten",
-    "actions.set-device.name": "Ausgabe auswählen"
+    "actions.set-output.name": "Ausgabe auswählen"
 }
