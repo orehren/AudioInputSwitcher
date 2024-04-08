@@ -66,7 +66,7 @@ class ToggleOutput(ActionBase):
 
         return [self.device_A_row, self.device_B_row]
     
-    def get_device_name(sink: pulsectl.Sink) -> str:
+    def get_device_name(sink) -> str:
         proplist = sink.proplist
         return proplist.get("device.product.name", proplist.get("device.description", proplist.get("alsa.card_name")))
 
