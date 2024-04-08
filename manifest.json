@@ -2,5 +2,6 @@
     "version": "1.0.0",
     "thumbnail": "store/Thumbnail.png",
     "id": "com_core447_AudioSwitcher",
-    "name": "Audio Switcher"
+    "name": "Audio Switcher",
+    "description": "Switch between audio outputs"
 }
