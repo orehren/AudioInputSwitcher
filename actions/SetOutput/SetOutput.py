@@ -58,7 +58,7 @@ class SetOutput(ActionBase):
         for i, device in enumerate(self.device_model):
             if device[0] == name:
                 self.device_row.combo_box.set_active(i)
-                break
+                return
 
         self.device_row.combo_box.set_active(-1)
 
