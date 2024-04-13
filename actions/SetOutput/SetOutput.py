@@ -12,7 +12,7 @@ import os
 import gi
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
-from gi.repository import Gtk, Adw
+from gi.repository import Gtk, Adw, Pango
 
 import pulsectl
 
@@ -31,7 +31,7 @@ class SetOutput(ActionBase):
         self.device_display_name = Gtk.ListStore.new([str])
         self.device_row = ComboRow(title=self.plugin_base.lm.get("actions.set-device.device.title"), model=self.device_display_name)
 
-        self.device_cell_renderer = Gtk.CellRendererText()
+        self.device_cell_renderer = Gtk.CellRendererText(ellipsize=Pango.EllipsizeMode.END, max_width_chars=60)
         self.device_row.combo_box.pack_start(self.device_cell_renderer, True)
         self.device_row.combo_box.add_attribute(self.device_cell_renderer, "text", 0)
 
