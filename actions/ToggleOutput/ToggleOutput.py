@@ -46,13 +46,14 @@ class ToggleOutput(ActionBase):
 
     def get_config_rows(self) -> list:
         self.device_model = Gtk.ListStore.new([str]) # First Column: Name,
+        self.device_display_name = Gtk.ListStore.new([str])
 
-        self.device_A_row = ComboRow(title=self.plugin_base.lm.get("actions.toggle-output.device-a.title"), model=self.device_model)
+        self.device_A_row = ComboRow(title=self.plugin_base.lm.get("actions.toggle-output.device-a.title"), model=self.device_display_name)
         self.device_cell_renderer = Gtk.CellRendererText()
         self.device_A_row.combo_box.pack_start(self.device_cell_renderer, True)
         self.device_A_row.combo_box.add_attribute(self.device_cell_renderer, "text", 0)
 
-        self.device_B_row = ComboRow(title=self.plugin_base.lm.get("actions.toggle-output.device-b.title"), model=self.device_model)
+        self.device_B_row = ComboRow(title=self.plugin_base.lm.get("actions.toggle-output.device-b.title"), model=self.device_display_name)
         self.device_cell_renderer = Gtk.CellRendererText()
         self.device_B_row.combo_box.pack_start(self.device_cell_renderer, True)
         self.device_B_row.combo_box.add_attribute(self.device_cell_renderer, "text", 0)
@@ -68,16 +69,22 @@ class ToggleOutput(ActionBase):
     
     def get_device_name(self, sink) -> str:
         proplist = sink.proplist
-        return proplist.get("device.product.name", proplist.get("device.description", proplist.get("alsa.card_name")))
+        return proplist.get("node.name")
+
+    def get_device_display_name(self, sink) -> str:
+        proplist = sink.proplist
+        return f'{proplist.get("device.product.name")} {proplist.get("device.profile.description")}'
 
     def load_device_model(self):
         self.device_model.clear()
         with pulsectl.Pulse('set-output') as pulse:
             for sink in pulse.sink_list():
                 name = self.get_device_name(sink)
+                display_name = self.get_device_display_name(sink)
                 if name is None:
                     continue
                 self.device_model.append([name])
+                self.device_display_name.append([display_name])
 
     def load_config_settings(self):
         settings = self.get_settings()

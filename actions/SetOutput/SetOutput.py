@@ -28,7 +28,8 @@ class SetOutput(ActionBase):
 
     def get_config_rows(self) -> list:
         self.device_model = Gtk.ListStore.new([str]) # First Column: Name,
-        self.device_row = ComboRow(title=self.plugin_base.lm.get("actions.set-device.device.title"), model=self.device_model)
+        self.device_display_name = Gtk.ListStore.new([str])
+        self.device_row = ComboRow(title=self.plugin_base.lm.get("actions.set-device.device.title"), model=self.device_display_name)
 
         self.device_cell_renderer = Gtk.CellRendererText()
         self.device_row.combo_box.pack_start(self.device_cell_renderer, True)
@@ -47,10 +48,12 @@ class SetOutput(ActionBase):
         with pulsectl.Pulse('set-output') as pulse:
             for sink in pulse.sink_list():
                 proplist = sink.proplist
-                name = proplist.get("device.product.name", proplist.get("device.description"))
+                name = proplist.get("node.name")
+                display_name = f'{proplist.get("device.product.name")} {proplist.get("device.profile.description")}'
                 if name is None:
                     continue
                 self.device_model.append([name])
+                self.device_display_name.append([display_name])
 
     def load_config_settings(self):
         settings = self.get_settings()
@@ -78,7 +81,7 @@ class SetOutput(ActionBase):
         with pulsectl.Pulse('set-output') as pulse:
             for sink in pulse.sink_list():
                 proplist = sink.proplist
-                name = proplist.get("device.product.name", proplist.get("device.description"))
+                name = proplist.get("node.name")
                 if name == device_name:
                     pulse.default_set(sink)
                     break
