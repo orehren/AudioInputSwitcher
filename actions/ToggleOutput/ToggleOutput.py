@@ -50,7 +50,7 @@ class ToggleOutput(ActionBase):
 
 
         self.device_A_row = ComboRow(title=self.plugin_base.lm.get("actions.toggle-output.device-a.title"), model=self.device_display_name)
-        self.device_cell_renderer = Gtk.CellRendererText(ellipsize=Gtk.Pango.EllipsizeMode.END, max_width_chars=60)
+        self.device_cell_renderer = Gtk.CellRendererText(ellipsize=Pango.EllipsizeMode.END, max_width_chars=60)
         self.device_A_row.combo_box.pack_start(self.device_cell_renderer, True)
         self.device_A_row.combo_box.add_attribute(self.device_cell_renderer, "text", 0)
 
