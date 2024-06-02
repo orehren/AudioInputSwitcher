@@ -46,7 +46,7 @@ class SetOutput(ActionBase):
             for sink in pulse.sink_list():
                 proplist = sink.proplist
                 name = proplist.get("node.name")
-                display_name = f'{proplist.get("device.product.name")} {proplist.get("device.profile.description")}'
+                display_name = self.get_display_name(sink)
                 if name is None:
                     continue
                 self.device_model.append([name])
@@ -82,3 +82,12 @@ class SetOutput(ActionBase):
                 if name == device_name:
                     pulse.default_set(sink)
                     break
+
+    def get_display_name(self, sink) -> str:
+        proplist = sink.proplist
+        name = (proplist.get("device.product.name") or proplist.get("device.nick") or
+                proplist.get("device.description") or sink.name or None)
+        description = proplist.get("device.profile.description")
+        if description not in ("", None):
+            name = f'{name} ({description})'
+        return name

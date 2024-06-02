@@ -67,14 +67,6 @@ class ToggleOutput(ActionBase):
 
         return [self.device_A_row, self.device_B_row]
     
-    def get_device_name(self, sink) -> str:
-        proplist = sink.proplist
-        return proplist.get("node.name")
-
-    def get_device_display_name(self, sink) -> str:
-        proplist = sink.proplist
-        return f'{proplist.get("device.product.name")} {proplist.get("device.profile.description")}'
-
     def load_device_model(self):
         self.device_model.clear()
         with pulsectl.Pulse('set-output') as pulse:
@@ -156,3 +148,12 @@ class ToggleOutput(ActionBase):
                         break
 
         self.show_state()
+
+    def get_display_name(self, sink) -> str:
+        proplist = sink.proplist
+        name = (proplist.get("device.product.name") or proplist.get("device.nick") or
+                proplist.get("device.description") or sink.name or None)
+        description = proplist.get("device.profile.description")
+        if description not in ("", None):
+            name = f'{name} ({description})'
+        return name
