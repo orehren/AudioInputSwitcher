@@ -71,7 +71,7 @@ class ToggleOutput(ActionBase):
         self.device_model.clear()
         with pulsectl.Pulse('set-output') as pulse:
             for sink in pulse.sink_list():
-                name = self.get_device_name(sink)
+                name = self.get_node_name(sink)
                 display_name = self.get_device_display_name(sink)
                 if name is None:
                     continue
@@ -114,7 +114,7 @@ class ToggleOutput(ActionBase):
         with pulsectl.Pulse('set-output') as pulse:
             default_sink = pulse.sink_default_get()
             for sink in pulse.sink_list():
-                name = self.get_device_name(sink)
+                name = self.get_node_name(sink)
                 if name == device_a and sink.index == default_sink.index:
                     return -1
                 if name == device_b and sink.index == default_sink.index:
@@ -134,7 +134,7 @@ class ToggleOutput(ActionBase):
         default_sink_result = self.get_active_sink()
         with pulsectl.Pulse('set-output') as pulse:
             for sink in pulse.sink_list():
-                name = self.get_device_name(sink)
+                name = self.get_node_name(sink)
                 
                 if default_sink_result == -1:
                     # Device a is selected
@@ -157,3 +157,7 @@ class ToggleOutput(ActionBase):
         if description not in ("", None):
             name = f'{name} ({description})'
         return name
+    
+    def get_node_name(self, sink) -> str:
+        proplist = sink.proplist
+        return proplist.get("node.name")
