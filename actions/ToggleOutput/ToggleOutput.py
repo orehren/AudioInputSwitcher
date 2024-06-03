@@ -149,7 +149,7 @@ class ToggleOutput(ActionBase):
 
         self.show_state()
 
-    def get_display_name(self, sink) -> str:
+    def get_device_display_name(self, sink) -> str:
         proplist = sink.proplist
         name = (proplist.get("device.product.name") or proplist.get("device.nick") or
                 proplist.get("device.description") or sink.name or None)
