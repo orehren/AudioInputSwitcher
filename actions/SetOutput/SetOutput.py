@@ -44,8 +44,7 @@ class SetOutput(ActionBase):
         self.device_model.clear()
         with pulsectl.Pulse('set-output') as pulse:
             for sink in pulse.sink_list():
-                proplist = sink.proplist
-                name = proplist.get("node.name")
+                name = self.get_sink_identifier(sink)
                 display_name = self.get_display_name(sink)
                 if name is None:
                     continue
@@ -91,3 +90,7 @@ class SetOutput(ActionBase):
         if description not in ("", None):
             name = f'{name} ({description})'
         return name
+    
+    def get_sink_identifier(self, sink) -> str:
+        proplist = sink.proplist
+        return proplist.get("node.name") or sink.name
