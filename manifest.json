@@ -1,19 +1,19 @@
 {
     "version": "1.0.0",
     "thumbnail": "store/Thumbnail.png",
-    "id": "com_core447_AudioSwitcher",
-    "name": "Audio Switcher",
+    "id": "scientificpsycho_AudioSwitcher",
+    "name": "Audio Input Switcher",
     "descriptions": {
-        "en_US": "Switch between audio outputs"
+        "en_US": "Switch between audio inputs"
     },
     "short-descriptions": {
-        "en_US": "Switch between audio outputs"
+        "en_US": "Switch between audio inputs"
     },
     "tags": ["Audio"],
     "minimum-app-version": "1.0.0",
     "app-version": "1.4.11-beta",
 
     
-    "description": "Switch between audio outputs",
-    "short-description": "Switch between audio outputs"
+    "description": "Switch between audio inputs",
+    "short-description": "Switch between audio inputs"
 }
