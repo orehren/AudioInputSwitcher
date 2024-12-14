@@ -2,7 +2,7 @@
     "plugin.name": "Audio Input Switcher",
     "ais.actions.toggle-input.device-a.title": "First device",
     "ais.actions.toggle-input.device-b.title": "Second device",
-    "ais.actions.set-device.device.title": "Device",
+    "ais.actions.set-device.device.title": "Input Device",
     "ais.actions.toggle-input.name": "Toggle input",
-    "ais.actions.set-input.name": "Set device"
+    "ais.actions.set-input.name": "Set Input device"
 }

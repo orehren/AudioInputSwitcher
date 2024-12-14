@@ -1,8 +1,8 @@
 {
-    "plugin.name": "Audio Umschalter",
+    "plugin.name": "Audio Input Umschalter",
     "ais.actions.toggle-output.device-a.title": "1. Gerät",
     "ais.actions.toggle-output.device-b.title": "2. Gerät",
     "ais.actions.set-device.device.title": "Gerät",
-    "ais.actions.toggle-output.name": "Ausgabe umschalten",
-    "ais.actions.set-output.name": "Ausgabe auswählen"
+    "ais.actions.toggle-output.name": "Eingabe umschalten",
+    "ais.actions.set-output.name": "Eingabe auswählen"
 }
